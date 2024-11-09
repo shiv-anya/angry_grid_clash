@@ -1,13 +1,29 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "AB";
+  src: local("AB"), url("./assets/angrybirds-regular.ttf") format("opentype");
+  font-weight: normal;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "AB", "Courier New", Courier, monospace;
+}
+
+.birdChance {
+  box-shadow: rgba(255, 0, 0, 0.12) 0px 2px 4px 0px,
+    rgba(255, 0, 0, 0.32) 0px 2px 16px 0px;
+}
+
+.pigChance {
+  box-shadow: rgba(0, 255, 0, 0.12) 0px 2px 4px 0px,
+    rgba(0, 255, 0, 0.32) 0px 2px 16px 0px;
 }
