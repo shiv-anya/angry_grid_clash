@@ -5,6 +5,8 @@ import { checkWinner } from "./GameState";
 import { calculateAITurn } from "./AI";
 import pigAudio from "../assets/pigAudio.mp3";
 import birdAudio from "../assets/birdAudio.mp3";
+import Reset from "../assets/reset.png";
+import Quit from "../assets/quit.png";
 
 export const GAME_STATE = {
   PLAYER_TURN: "player_turn",
@@ -27,18 +29,26 @@ const createEmptyGrid = () => {
   return Array(GRID_LENGTH).fill(SPACE_STATE.EMPTY);
 };
 
-const getSpaceStateClass = (spaceState) => {
+const getSpaceStateClass = (spaceState, gameState, winSpaces, spaceIndex) => {
   let space = "";
-
+  console.log(winSpaces, spaceIndex);
   if (spaceState === SPACE_STATE.AI) {
-    return "o-player";
+    space += "o-player";
+
+    if (gameState === GAME_STATE.AI_WON && winSpaces.includes(spaceIndex)) {
+      space += " o-winner";
+    }
   }
 
   if (spaceState === SPACE_STATE.PLAYER) {
-    return "x-player";
+    space += "x-player";
+
+    if (gameState === GAME_STATE.PLAYER_WON && winSpaces.includes(spaceIndex)) {
+      space += " x-winner";
+    }
   }
 
-  return "";
+  return space;
 };
 
 const getSquareSymbol = (spaceStatus) => {
@@ -65,6 +75,13 @@ export const Board = ({ pageSetToFinish }) => {
   const [gameState, setGameState] = useState(GAME_STATE.PLAYER_TURN);
   const [moveCount, setMoveCount] = useState(0);
   const [winSpaces, setWinSpaces] = useState([]);
+
+  const resetGame = () => {
+    setGrid(createEmptyGrid());
+    setGameState(GAME_STATE.PLAYER_TURN);
+    setMoveCount(0);
+    setWinSpaces([]);
+  };
 
   const playBirdMusic = () => {
     birdMusic.play().catch((e) => console.log(e));
@@ -106,9 +123,27 @@ export const Board = ({ pageSetToFinish }) => {
   };
 
   const Square = ({ sqIndex }) => {
+    console.log(grid[sqIndex]);
+    const winner = getSpaceStateClass(
+      grid[sqIndex],
+      gameState,
+      winSpaces,
+      sqIndex
+    );
+    console.log(winner);
+    const color = (winner) => {
+      if (winner === "o-player o-winner") {
+        return "bg-green-200";
+      } else if (winner === "x-player x-winner") {
+        return "bg-red-200";
+      } else return "bg-gray-900";
+    };
+    console.log(color(winner));
     return (
       <div
-        className="size-24 bg-gray-900 flex justify-center items-center p-2"
+        className={`${color(
+          winner
+        )} size-24 bg-gray-900 flex justify-center items-center p-2`}
         onClick={() => handlePlayerClick(sqIndex)}
       >
         {getSquareSymbol(grid[sqIndex])}
@@ -120,7 +155,7 @@ export const Board = ({ pageSetToFinish }) => {
     // Player took turn and changed game state,
     // check for a winner.
     let winner = checkWinner(grid, moveCount);
-
+    console.log(winner);
     // If the someone won, update state to reflect and set winner spaces.
     if (winner) {
       setGameState(winner.winner);
@@ -161,6 +196,16 @@ export const Board = ({ pageSetToFinish }) => {
   return (
     <div className="h-screen w-full bg-[url('/src/assets/hero.jpg')] bg-cover bg-center">
       <div className="w-full h-full bg-[rgba(0,0,0,0.7)] flex justify-center items-center">
+        <div className="fixed top-0 right-0 flex items-center gap-5 p-5">
+          <button onClick={resetGame}>
+            <img src={Reset} className="size-20" />
+          </button>
+          <form>
+            <button className="size-20">
+              <img src={Quit} />
+            </button>
+          </form>
+        </div>
         <div
           id="board"
           className={`${
