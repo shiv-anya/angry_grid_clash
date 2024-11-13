@@ -21,9 +21,15 @@ body {
 .birdChance {
   box-shadow: rgba(255, 0, 0, 0.12) 0px 2px 4px 0px,
     rgba(255, 0, 0, 0.32) 0px 2px 16px 0px;
+  background-color: rgba(254, 202, 202, 1);
 }
 
 .pigChance {
   box-shadow: rgba(0, 255, 0, 0.12) 0px 2px 4px 0px,
     rgba(0, 255, 0, 0.32) 0px 2px 16px 0px;
+  background-color: rgba(110, 231, 183, 1);
+}
+
+.pointer-events-none {
+  pointer-events: none;
 }
