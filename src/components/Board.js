@@ -31,7 +31,7 @@ const createEmptyGrid = () => {
 
 const getSpaceStateClass = (spaceState, gameState, winSpaces, spaceIndex) => {
   let space = "";
-  console.log(winSpaces, spaceIndex);
+
   if (spaceState === SPACE_STATE.AI) {
     space += "o-player";
 
@@ -100,9 +100,6 @@ export const Board = ({ pageSetToFinish }) => {
 
   // Fill in the grid array with the player space state.
   const handlePlayerClick = (gridIndex) => {
-    console.log("here");
-    console.log(gridIndex);
-    console.log(gameState);
     // If not the player turn, then exit.
     if (gameState !== GAME_STATE.PLAYER_TURN) {
       return;
@@ -123,14 +120,13 @@ export const Board = ({ pageSetToFinish }) => {
   };
 
   const Square = ({ sqIndex }) => {
-    console.log(grid[sqIndex]);
     const winner = getSpaceStateClass(
       grid[sqIndex],
       gameState,
       winSpaces,
       sqIndex
     );
-    console.log(winner);
+
     const color = (winner) => {
       if (winner === "o-player o-winner") {
         return "bg-green-200";
@@ -138,7 +134,7 @@ export const Board = ({ pageSetToFinish }) => {
         return "bg-red-200";
       } else return "bg-gray-900";
     };
-    console.log(color(winner));
+
     return (
       <div
         className={`${color(
@@ -155,17 +151,18 @@ export const Board = ({ pageSetToFinish }) => {
     // Player took turn and changed game state,
     // check for a winner.
     let winner = checkWinner(grid, moveCount);
-    console.log(winner);
+
     // If the someone won, update state to reflect and set winner spaces.
     if (winner) {
       setGameState(winner.winner);
       setWinSpaces(winner.winSpaces);
+      setTimeout(() => pageSetToFinish(winner), 2000);
     }
 
     // Run AI turn
     if (gameState === GAME_STATE.AI_TURN && moveCount < 10) {
       const board = document.getElementById("board");
-      console.log(board);
+
       board.classList.add("pointer-events-none");
       async function delay() {
         return new Promise((resolve) =>
@@ -177,8 +174,7 @@ export const Board = ({ pageSetToFinish }) => {
         setMoveCount((oldMoves) => {
           return oldMoves + 1;
         });
-        console.log("lofu");
-        console.log(board);
+
         playPigMusic();
         fillGridSpace(aiSpace, SPACE_STATE.AI);
         winner = checkWinner(grid, moveCount);
