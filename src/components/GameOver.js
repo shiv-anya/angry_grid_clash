@@ -26,8 +26,9 @@ export const GameOver = ({ winner }) => {
       localStorage.setItem("birdScore", 0);
       localStorage.setItem("pigScore", 0);
     }
+    console.log(winner.winner);
     setWhoWon(winner.winner);
-    if (winner.winner === "player_x_won") {
+    if (winner.winner === "player_won") {
       birdAud.loop = true;
       birdAud.play();
       const newBirdScore = storedBirdScore + 1;
@@ -50,7 +51,7 @@ export const GameOver = ({ winner }) => {
           <img src={Restart} className="size-20 z-0" />
         </button>
       </form>
-      {(whoWon === "player_x_won" || whoWon === "player_o_won") && (
+      {(whoWon === "player_won" || whoWon === "player_o_won") && (
         <ReactConfetti className="h-screen w-full" />
       )}
       {whoWon === "game_draw" && (
@@ -61,7 +62,7 @@ export const GameOver = ({ winner }) => {
           <h1 className="text-8xl">DRAW!!</h1>
         </Marquee>
       )}
-      {whoWon === "player_x_won" && (
+      {whoWon === "player_won" && (
         <Marquee
           direction="right"
           style={{ position: "fixed", top: "20px", overflow: "hidden" }}
@@ -93,7 +94,7 @@ export const GameOver = ({ winner }) => {
           </div>
         </div>
       </div>
-      {whoWon === "player_x_won" && (
+      {whoWon === "player_won" && (
         <Marquee
           direction="right"
           style={{ position: "fixed", bottom: 0, height: "370px" }}
