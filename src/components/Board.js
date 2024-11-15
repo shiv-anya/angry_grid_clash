@@ -139,7 +139,7 @@ export const Board = ({ pageSetToFinish }) => {
       <div
         className={`${color(
           winner
-        )} size-24 bg-gray-900 flex justify-center items-center p-2`}
+        )} lg:size-24 md:size-24 size-14 bg-gray-900 flex justify-center items-center p-2`}
         onClick={() => handlePlayerClick(sqIndex)}
       >
         {getSquareSymbol(grid[sqIndex])}
@@ -194,10 +194,10 @@ export const Board = ({ pageSetToFinish }) => {
       <div className="w-full h-full bg-[rgba(0,0,0,0.7)] flex justify-center items-center">
         <div className="fixed top-0 right-0 flex items-center gap-5 p-5">
           <button onClick={resetGame}>
-            <img src={Reset} className="size-20" />
+            <img src={Reset} className="lg:size-20 md:size-20 size-14" />
           </button>
           <form>
-            <button className="size-20">
+            <button className="lg:size-20 md:size-20 size-14">
               <img src={Quit} />
             </button>
           </form>
@@ -206,7 +206,7 @@ export const Board = ({ pageSetToFinish }) => {
           id="board"
           className={`${
             gameState === GAME_STATE.PLAYER_TURN ? "birdChance" : "pigChance"
-          } size-80 flex flex-col gap-4`}
+          } lg:size-80 md:size-80 size-48 flex flex-col lg:gap-4 md:gap-4 gap-3`}
         >
           <div className="flex justify-between">
             <Square sqIndex={0} key={0} />

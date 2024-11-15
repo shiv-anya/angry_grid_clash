@@ -20,12 +20,12 @@ export const Welcome = ({ pageHandler }) => {
   }
   return (
     <div className="h-screen w-full bg-[url('/src/assets/hero.jpg')] bg-cover bg-center flex justify-center items-center">
-      <div className="flex-col justify-items-center content-center">
-        <h1 className="uppercase text-white text-center text-9xl mb-8">
+      <div className="flex-col justify-items-center content-center px-2">
+        <h1 className="uppercase text-white text-center lg:text-9xl md:text-8xl text-5xl mb-8">
           Angry Grid Clash
         </h1>
         <button onClick={pageHandler}>
-          <img src={Play} className="h-40 hover:scale-110" />
+          <img src={Play} className="lg:h-40 md:h-40 h-24 hover:scale-110" />
         </button>
       </div>
       <button>

@@ -26,7 +26,6 @@ export const GameOver = ({ winner }) => {
       localStorage.setItem("birdScore", 0);
       localStorage.setItem("pigScore", 0);
     }
-    console.log(winner.winner);
     setWhoWon(winner.winner);
     if (winner.winner === "player_won") {
       birdAud.loop = true;
@@ -45,10 +44,10 @@ export const GameOver = ({ winner }) => {
   }, []);
 
   return (
-    <div className="h-screen w-full flex text-white">
+    <div className="h-screen w-full flex lg:flex-row md:flex-row flex-col text-white">
       <form className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <button>
-          <img src={Restart} className="size-20 z-0" />
+          <img src={Restart} className="lg:size-20 md:size-20 size-16 z-0" />
         </button>
       </form>
       {(whoWon === "player_won" || whoWon === "player_o_won") && (
@@ -59,7 +58,7 @@ export const GameOver = ({ winner }) => {
           direction="right"
           style={{ position: "fixed", top: "20px", overflow: "hidden" }}
         >
-          <h1 className="text-8xl">DRAW!!</h1>
+          <h1 className="lg:text-8xl md:text-6xl text-3xl">DRAW!!</h1>
         </Marquee>
       )}
       {whoWon === "player_won" && (
@@ -67,7 +66,7 @@ export const GameOver = ({ winner }) => {
           direction="right"
           style={{ position: "fixed", top: "20px", overflow: "hidden" }}
         >
-          <h1 className="text-8xl">BIRDS WIN!</h1>
+          <h1 className="lg:text-8xl md:text-6xl text-3xl">BIRDS WIN!</h1>
         </Marquee>
       )}
       {whoWon === "player_o_won" && (
@@ -75,10 +74,10 @@ export const GameOver = ({ winner }) => {
           direction="right"
           style={{ position: "fixed", top: "20px", overflow: "hidden" }}
         >
-          <h1 className="text-8xl">PIGS RULE!</h1>
+          <h1 className="lg:text-8xl md:text-6xl text-3xl">PIGS RULE!</h1>
         </Marquee>
       )}
-      <div className="h-screen bg-[url('/src/assets/red-half.jpg')] flex-1 bg-center bg-cover">
+      <div className="lg:h-screen md:h-screen h-1/2 bg-[url('/src/assets/red-half.jpg')] flex-1 bg-center bg-cover">
         <div className="h-full w-full bg-[rgba(0,0,0,0.6)] flex items-center justify-center">
           <div className="flex-col justify-items-center">
             <p className="text-7xl mb-5">{birdScore}</p>
@@ -86,7 +85,7 @@ export const GameOver = ({ winner }) => {
           </div>
         </div>
       </div>
-      <div className="h-screen bg-[url('/src/assets/pig-half.jpg')] flex-1 bg-center bg-cover">
+      <div className="lg:h-screen md:h-screen h-1/2 bg-[url('/src/assets/pig-half.jpg')] flex-1 bg-center bg-cover">
         <div className="h-full w-full bg-[rgba(0,0,0,0.6)]  flex items-center justify-center">
           <div className="flex-col justify-items-center">
             <p className="text-7xl mb-5">{pigScore}</p>
@@ -103,7 +102,7 @@ export const GameOver = ({ winner }) => {
             <img
               src={BirdsArmy}
               alt="birds army"
-              className="h-60 z-30 relative"
+              className="lg:h-60 md:h-52 h-36 z-30 relative"
             />
             <img src={Flag} className="absolute z-0 bottom-16" />
           </div>
@@ -118,9 +117,12 @@ export const GameOver = ({ winner }) => {
             <img
               src={PigsArmy}
               alt="pigs army"
-              className="h-36 relative z-10"
+              className="lg:h-36 md:h-36 h-20 relative z-10"
             />
-            <img src={Flag} className="absolute z-0 bottom-0 left-60 h-72" />
+            <img
+              src={Flag}
+              className="absolute z-0 lg:bottom-0 md:bottom-0 bottom-[-16px] lg:left-60 md:left-60 left-20 lg:h-72 md:h-72 h-48"
+            />
           </div>
         </Marquee>
       )}
