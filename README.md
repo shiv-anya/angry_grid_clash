@@ -20,7 +20,7 @@ Check out the [live demo](https://angry-grid-clash.vercel.app/#) of the game!
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/angry-birds-tic-tac-toe.git
+   git clone https://github.com/shiv-anya/angry_grid_clash.git
    cd angry-birds-tic-tac-toe
    ```
 
